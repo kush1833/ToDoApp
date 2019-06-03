@@ -5,15 +5,4 @@
     android:background="@drawable/custom_button"
     android:elevation="4dp">
 
-    <TextView
-        android:id="@+id/toolbar_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:singleLine="true"
-        android:text="ToDo"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
 </android.support.v7.widget.Toolbar>
