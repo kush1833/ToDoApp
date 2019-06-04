@@ -2,6 +2,7 @@ package com.example.kushagra.todo;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +28,7 @@ public class CreateTask extends AppCompatActivity implements TimePickerDialog.On
 
     private static final String TAG = "CreateTask";
 
-    public static ArrayList<String> tList;
+    DatabaseHelper db;
     private TextView mdateTextView;
     private TextView mtimeTextView;
     private TextInputLayout mtaskTextInputLayout;
@@ -35,16 +37,17 @@ public class CreateTask extends AppCompatActivity implements TimePickerDialog.On
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
 
+        db = new DatabaseHelper(this);
+
         mdateTextView = (TextView)findViewById(R.id.dateTextView);
         mtimeTextView = (TextView)findViewById(R.id.timeTextView);
-
         mtaskTextInputLayout = (TextInputLayout)findViewById(R.id.taskTextInputLayout);
-
         maddBtn = (Button)findViewById(R.id.addBtn);
 
 
@@ -99,16 +102,21 @@ public class CreateTask extends AppCompatActivity implements TimePickerDialog.On
         String date = mdateTextView.getText().toString();
         String time = mtimeTextView.getText().toString();
         String task = mtaskTextInputLayout.getEditText().getText().toString().trim();
-        MainActivity.taskArrayList.add(task+","+ date + " at "+time);
+        boolean isInserted = db.insertData(task,date,time);
 
-        mdateTextView.setText("");
-        mtimeTextView.setText("");
-        mtaskTextInputLayout.getEditText().setText("");
-        //Intent intent = new Intent(this,MainActivity.class);
-        //intent.putExtra(EXTRA_LIST,tList);
 
-        //startActivity(intent);
-        finish();
+        if(isInserted == true) {
+            Toast.makeText(CreateTask.this,"Task Added",Toast.LENGTH_LONG).show();
+            mdateTextView.setText("");
+            mtimeTextView.setText("");
+            mtaskTextInputLayout.getEditText().setText("");
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            Toast.makeText(CreateTask.this,"Error while adding Task",Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

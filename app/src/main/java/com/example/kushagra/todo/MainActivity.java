@@ -1,6 +1,7 @@
 package com.example.kushagra.todo;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    DatabaseHelper db;
     public static ArrayList<TaskItems> taskList;
     public static ArrayList<String> taskArrayList;
     private static RecyclerView mtaskRecyclerView;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DatabaseHelper(this);
 
         mtaskRecyclerView = (RecyclerView)findViewById(R.id.taskRecyclerView);
         addTaskBtn = (Button)findViewById(R.id.addTaskBtn);
@@ -42,18 +46,7 @@ public class MainActivity extends AppCompatActivity {
         taskList = new ArrayList<>();
 
         buildRecyclerView();
-
-        if(taskArrayList != null) {
-            for (String s : taskArrayList) {
-                int i = s.indexOf(',');
-                String newTask = s.substring(0, i);
-                String newTime = s.substring(i + 1);
-                TaskItems obj = new TaskItems(newTask, newTime);
-                taskList.add(obj);
-                mRecyclerViewAdapter.notifyDataSetChanged();
-            }
-        }
-
+        displayTasks();
 
     }
 
@@ -71,5 +64,14 @@ public class MainActivity extends AppCompatActivity {
         this.recreate();
     }
 
+    public void displayTasks(){
+        Cursor result = db.getAllData();
+        if(result.getCount() == 0){
+            //no data
+        }
+        else{
+            //display in recycler view
+        }
+    }
 
 }
