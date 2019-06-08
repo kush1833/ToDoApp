@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    android:id="@+id/itemCardView">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
             android:id="@+id/taskTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Task Pending"
+            android:text="No Task Added"
             android:textColor="@android:color/holo_green_light"
             android:layout_alignParentTop = "true"
             android:textSize="20sp"
@@ -30,6 +31,16 @@
             android:textSize="10sp"
             android:textStyle="italic"
             android:layout_below="@id/taskTextView" />
+
+        <TextView
+            android:id="@+id/optionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="&#8942;" />
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

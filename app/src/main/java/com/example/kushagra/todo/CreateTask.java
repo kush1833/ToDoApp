@@ -102,17 +102,19 @@ public class CreateTask extends AppCompatActivity implements TimePickerDialog.On
         String date = mdateTextView.getText().toString();
         String time = mtimeTextView.getText().toString();
         String task = mtaskTextInputLayout.getEditText().getText().toString().trim();
-        boolean isInserted = db.insertData(task,date,time);
+        if(date!=null && time!=null && task!=null){
+            boolean isInserted = db.insertData(task,date,time);
 
 
-        if(isInserted == true) {
-            Toast.makeText(CreateTask.this,"Task Added",Toast.LENGTH_LONG).show();
-            mdateTextView.setText("");
-            mtimeTextView.setText("");
-            mtaskTextInputLayout.getEditText().setText("");
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            if(isInserted == true) {
+                Toast.makeText(CreateTask.this, "Task Added", Toast.LENGTH_LONG).show();
+                mdateTextView.setText("");
+                mtimeTextView.setText("");
+                mtaskTextInputLayout.getEditText().setText("");
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
         else{
             Toast.makeText(CreateTask.this,"Error while adding Task",Toast.LENGTH_LONG).show();
