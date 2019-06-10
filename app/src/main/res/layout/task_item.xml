@@ -15,9 +15,9 @@
             android:id="@+id/taskTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:text="No Task Added"
             android:textColor="@android:color/holo_green_light"
-            android:layout_alignParentTop = "true"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -25,21 +25,27 @@
             android:id="@+id/timeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/taskTextView"
             android:layout_marginStart="8dp"
             android:text="DD/MM/YYYY at --:-- hrs"
             android:textColor="@android:color/holo_blue_bright"
             android:textSize="10sp"
-            android:textStyle="italic"
-            android:layout_below="@id/taskTextView" />
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/optionTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="&#8942;" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="0dp"
+            android:text="&#8942;"
+            android:textAppearance="?android:textAppearanceLarge" />
 
     </RelativeLayout>
 

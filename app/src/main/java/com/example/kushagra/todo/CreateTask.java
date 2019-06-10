@@ -71,7 +71,7 @@ public class CreateTask extends AppCompatActivity implements TimePickerDialog.On
                         CreateTask.this,mOnDateSetListener,year,month,day
                 );
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
             }
         });
@@ -107,13 +107,15 @@ public class CreateTask extends AppCompatActivity implements TimePickerDialog.On
 
 
             if(isInserted == true) {
-                Toast.makeText(CreateTask.this, "Task Added", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreateTask.this, "Task Added", Toast.LENGTH_SHORT).show();
                 mdateTextView.setText("");
                 mtimeTextView.setText("");
                 mtaskTextInputLayout.getEditText().setText("");
+
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
+
             }
         }
         else{
@@ -123,7 +125,9 @@ public class CreateTask extends AppCompatActivity implements TimePickerDialog.On
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        mtimeTextView.setText(hourOfDay+":"+minute);
+        String hr = (hourOfDay/10==0)?"0":"";
+        String mi = (minute/10==0)?"0":"";
+        mtimeTextView.setText(hr+String.valueOf(hourOfDay)+":"+mi+String.valueOf(minute));
     }
 
 

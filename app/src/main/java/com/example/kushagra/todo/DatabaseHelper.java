@@ -48,9 +48,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean deleteData(int id){
+    public boolean deleteData(String task, String time){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from "+TABLE_NAME+" where "+ID+" ="+id);
+        int i = time.indexOf('a');
+        String date = time.substring(0,i-1);
+        String t = time.substring(i+3);
+        String query = "delete from "+TABLE_NAME+" where "+TASK_COL+" =\'"+task+"\' AND "+DATE_COL+" =\'"+date+"\' AND "+TIME_COL+" =\'"+t+"\'";
+        db.execSQL(query);
         return true;
     }
 

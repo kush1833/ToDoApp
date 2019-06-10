@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public void toCreateTask(){
         Intent intent = new Intent(this, CreateTask.class);
         startActivity(intent);
-        this.recreate();
+
     }
 
     public void displayTasks(){
@@ -90,5 +90,6 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerViewAdapter.notifyDataSetChanged();
         }
     }
+
 
 }

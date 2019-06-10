@@ -53,7 +53,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final TaskViewHolder taskViewHolder, final int i) {
-        TaskItems currentItem = mTaskList.get(i);
+        final TaskItems currentItem = mTaskList.get(i);
 
         taskViewHolder.mTextView1.setText(currentItem.getTaskText());
         taskViewHolder.mTextView2.setText(currentItem.getTimeText());
@@ -68,9 +68,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_item_delete:
-                                Toast.makeText(mContext,"Task Deleted Successfully",Toast.LENGTH_LONG).show();
+                                Toast.makeText(mContext,"Task Deleted Successfully",Toast.LENGTH_SHORT).show();
                                 DatabaseHelper db = new DatabaseHelper(mContext);
-                                db.deleteData(i);
+
+                                db.deleteData(currentItem.getTaskText(),currentItem.getTimeText());
                                 mTaskList.remove(i);
                                 notifyDataSetChanged();
                                 break;
